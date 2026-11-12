@@ -1,0 +1,6 @@
+.git
+.openai
+outputs
+plink.exe
+pscp.exe
+*.tar.gz

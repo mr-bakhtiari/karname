@@ -1,0 +1,22 @@
+# BEGIN KARNAME PORTAL
+karname.mrbakhtiari.com {
+  encode zstd gzip
+  reverse_proxy karname-web:8080
+
+  header {
+    -Server
+    X-Content-Type-Options nosniff
+    X-Frame-Options DENY
+    Referrer-Policy strict-origin-when-cross-origin
+    Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  }
+
+  log {
+    output stdout
+    format filter {
+      request>headers delete
+      wrap json
+    }
+  }
+}
+# END KARNAME PORTAL

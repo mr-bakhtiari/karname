@@ -1,2 +1,4 @@
 outputs/
 *.tar.gz
+plink.exe
+pscp.exe
