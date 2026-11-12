@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="پرتال امن و بدون ذخیره‌سازی داده برای ساخت و چاپ کارنامه مدارس">
+  <title>کارنامه‌ساز مدرسه</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">ک</span><div><b>کارنامه‌ساز</b><small>مدیریت هوشمند کارنامه</small></div></div>
+      <nav id="nav">
+        <button class="nav-item active" data-view="dashboard"><span>⌂</span> نمای کلی</button>
+        <button class="nav-item" data-view="classes"><span>▦</span> کلاس‌ها و دوره‌ها</button>
+        <button class="nav-item" data-view="builder"><span>＋</span> ساخت کارنامه</button>
+        <button class="nav-item" data-view="guide"><span>؟</span> راهنما و حریم خصوصی</button>
+      </nav>
+      <div class="privacy-card"><span class="shield">✓</span><div><b>پردازش روی دستگاه شما</b><small>نمره‌ها و تصاویر به سرور ارسال یا ذخیره نمی‌شوند.</small></div></div>
+      <button id="resetApp" class="ghost danger">پاک‌کردن تنظیمات محلی</button>
+    </aside>
+
+    <main>
+      <header class="topbar"><button id="menuBtn" class="icon-btn">☰</button><div class="school-chip"><span id="schoolInitial">م</span><div><b id="schoolTitle">مدرسه شما</b><small>مدیر سامانه</small></div></div><button id="newReport" class="primary small">ساخت کارنامه جدید</button></header>
+
+      <section id="dashboard" class="view active">
+        <div class="hero"><div><span class="eyebrow">سال تحصیلی ۱۴۰۶–۱۴۰۵</span><h1>کارنامه‌ها را دقیق، سریع و آماده چاپ بسازید.</h1><p>فایل نمرات و تصاویر را وارد کنید؛ سامانه خطاها را پیش از چاپ پیدا می‌کند و هر دو کارنامه را در یک صفحه A4 می‌چیند.</p><div class="hero-actions"><button class="primary" data-go="builder">شروع ساخت کارنامه</button><button class="secondary" id="loadDemo">مشاهده نمونه آماده</button></div></div><div class="hero-art"><div class="paper p1"></div><div class="paper p2"><div class="mini-head"></div><div class="mini-lines"></div><div class="mini-chart"></div></div><div class="status-bubble">✓ آماده چاپ</div></div></div>
+        <div class="stats"><article><span class="stat-icon indigo">▦</span><div><small>کلاس‌های ساخته‌شده</small><strong id="classCount">۰</strong></div></article><article><span class="stat-icon cyan">◷</span><div><small>آخرین فعالیت</small><strong id="lastActivity">هنوز شروع نشده</strong></div></article><article><span class="stat-icon amber">✓</span><div><small>کنترل‌های خودکار</small><strong>۶ مرحله</strong></div></article></div>
+        <div class="section-head"><div><h2>مسیر ساخت کارنامه</h2><p>چهار گام تا خروجی نهایی</p></div></div>
+        <div class="steps-grid"><article><span>۱</span><h3>تنظیم کلاس</h3><p>نام مدرسه، پایه، دوره و سال تحصیلی را ثبت کنید.</p></article><article><span>۲</span><h3>ورود اکسل</h3><p>ستون‌ها و نمره‌های اعشاری به‌صورت خودکار بررسی می‌شوند.</p></article><article><span>۳</span><h3>تطبیق تصاویر</h3><p>نام هر عکس با کد دانش‌آموزی داخل اکسل تطبیق داده می‌شود.</p></article><article><span>۴</span><h3>بازبینی و چاپ</h3><p>رتبه، میانگین و نمودارها را ببینید و PDF بگیرید.</p></article></div>
+      </section>
+
+      <section id="classes" class="view">
+        <div class="page-title"><div><span class="eyebrow">مدیریت دوره‌ها</span><h1>کلاس‌ها و گروه‌های کارنامه</h1><p>تنظیمات عمومی ذخیره می‌شود؛ اطلاعات دانش‌آموزان هرگز ذخیره نمی‌شود.</p></div><button class="primary" data-go="builder">＋ کلاس جدید</button></div>
+        <div id="classList" class="class-grid"></div>
+      </section>
+
+      <section id="builder" class="view">
+        <div class="page-title"><div><span class="eyebrow">سازنده کارنامه</span><h1>ساخت گروه کارنامه جدید</h1><p>تنظیمات را تکمیل و فایل‌ها را وارد کنید. همه‌چیز داخل مرورگر شما می‌ماند.</p></div><div class="progress-pill"><b id="progressText">مرحله ۱ از ۴</b><span><i id="progressBar"></i></span></div></div>
+        <div class="wizard-tabs"><button class="active" data-step="1"><b>۱</b><span>تنظیمات کلاس<small>مشخصات عمومی</small></span></button><button data-step="2"><b>۲</b><span>فایل نمرات<small>اکسل دانش‌آموزان</small></span></button><button data-step="3"><b>۳</b><span>تصاویر<small>فایل ZIP عکس‌ها</small></span></button><button data-step="4"><b>۴</b><span>بازبینی<small>کنترل و خروجی</small></span></button></div>
+
+        <div class="wizard-body">
+          <div class="step-panel active" data-panel="1">
+            <div class="panel-heading"><span class="panel-icon">⚙</span><div><h2>مشخصات مدرسه و کلاس</h2><p>این اطلاعات روی همه کارنامه‌های این گروه نمایش داده می‌شود.</p></div></div>
+            <div class="form-grid"><label class="span-2">نام مدرسه<input id="schoolName" placeholder="مثلاً دبیرستان دوره اول فرهنگ"></label><label>سال تحصیلی<input id="schoolYear" value="۱۴۰۶–۱۴۰۵"></label><label>پایه<select id="grade"><option>هفتم</option><option>هشتم</option><option>نهم</option><option>دهم</option><option>یازدهم</option><option>دوازدهم</option></select></label><label>دوره کارنامه<input id="period" placeholder="مثلاً آبان ماه" value="آبان ماه"></label><label>شماره کلاس<input id="classNo" placeholder="مثلاً ۷۰۲" value="۷۰۲"></label><label>عنوان گروه<input id="groupName" placeholder="مثلاً کلاس هفتم ۲"></label><label>نام مدیر یا مسئول<input id="managerName" placeholder="اختیاری"></label></div>
+            <div class="tip"><b>ایده کاربردی:</b> می‌توانید برای یک کلاس چند دوره مثل آبان، دی و خرداد بسازید و تنظیمات هر دوره را جدا نگه دارید.</div>
+          </div>
+
+          <div class="step-panel" data-panel="2">
+            <div class="panel-heading"><span class="panel-icon">XLS</span><div><h2>فایل نمرات دانش‌آموزان</h2><p>فایل XLSX، XLS یا CSV را انتخاب کنید. ردیف اول باید نام ستون‌ها باشد.</p></div></div>
+            <label class="dropzone" id="excelDrop"><input type="file" id="excelFile" accept=".xlsx,.xls,.csv"><span class="upload-icon">⇧</span><b>فایل اکسل را اینجا رها کنید</b><small>یا برای انتخاب فایل کلیک کنید · حداکثر ۱۰ مگابایت</small></label>
+            <div class="template-row"><div><b>ستون‌های پیشنهادی</b><small>کد دانش‌آموزی، نام، نام خانوادگی، نظر، سپس نام درس‌ها</small></div><button id="downloadTemplate" class="secondary small">دریافت فایل نمونه</button></div>
+            <div id="excelResult"></div>
+          </div>
+
+          <div class="step-panel" data-panel="3">
+            <div class="panel-heading"><span class="panel-icon">ZIP</span><div><h2>تصاویر دانش‌آموزان</h2><p>نام فایل هر تصویر باید دقیقاً برابر کد دانش‌آموزی باشد؛ مانند ۱۴۰۵۱۰۲۳.jpg</p></div></div>
+            <label class="dropzone" id="zipDrop"><input type="file" id="zipFile" accept=".zip"><span class="upload-icon">▧</span><b>فایل ZIP تصاویر را اینجا رها کنید</b><small>فرمت JPG، PNG یا WEBP · تصویر اختیاری است</small></label>
+            <div id="photoResult" class="match-summary empty"><span>هنوز فایلی انتخاب نشده است.</span></div>
+          </div>
+
+          <div class="step-panel" data-panel="4">
+            <div class="panel-heading"><span class="panel-icon">✓</span><div><h2>بازبینی نهایی</h2><p>خطاهای قرمز باید اصلاح شوند. هشدارهای زرد مانع تولید نیستند.</p></div></div>
+            <div id="validationSummary"></div>
+            <div class="review-actions"><button id="previewBtn" class="primary">تولید پیش‌نمایش کارنامه‌ها</button><button id="demoFromReview" class="secondary">استفاده از داده نمونه</button></div>
+          </div>
+          <div class="wizard-actions"><button id="prevStep" class="secondary" disabled>مرحله قبل</button><button id="nextStep" class="primary">مرحله بعد</button></div>
+        </div>
+      </section>
+
+      <section id="preview" class="view">
+        <div class="preview-toolbar"><div><button class="secondary small" data-go="builder">بازگشت به ویرایش</button><h1>پیش‌نمایش چاپ</h1><span id="previewMeta"></span></div><div><button id="zoomToggle" class="secondary small">نمای نزدیک</button><button id="printBtn" class="primary small">چاپ / ذخیره PDF</button></div></div>
+        <div class="print-note">اندازه کاغذ را A4 و حاشیه را «پیش‌فرض» یا «هیچ» انتخاب کنید. گزینه چاپ پس‌زمینه‌ها روشن باشد.</div>
+        <div id="printArea"></div>
+      </section>
+
+      <section id="guide" class="view">
+        <div class="page-title"><div><span class="eyebrow">راهنما</span><h1>قالب فایل و حریم خصوصی</h1><p>پیش از شروع این نکات را بررسی کنید.</p></div></div>
+        <div class="guide-grid"><article><h3>ساختار اکسل</h3><p>ردیف اول عنوان ستون‌هاست. ستون‌های «کد دانش‌آموزی»، «نام»، «نام خانوادگی» و «نظر» شناخته می‌شوند. هر ستون دیگر به‌عنوان درس در نظر گرفته می‌شود.</p><ul><li>نمره‌ها می‌توانند صحیح یا اعشاری و بین ۰ تا ۲۰ باشند.</li><li>حداکثر ۳۲ درس در دو ردیف ۱۶تایی نمایش داده می‌شود.</li><li>کد دانش‌آموزی باید یکتا باشد.</li></ul></article><article><h3>فایل تصاویر</h3><p>همه عکس‌ها را در یک ZIP قرار دهید. پوشه داخلی ZIP مهم نیست؛ نام فایل باید کد دانش‌آموزی باشد.</p><code>۱۴۰۵۱۰۲۳.jpg<br>۱۴۰۵۱۰۲۴.png</code></article><article><h3>چه چیزی ذخیره می‌شود؟</h3><p>فقط نام مدرسه و تنظیمات کلاس در مرورگر همین دستگاه نگهداری می‌شود. فایل اکسل، نمره‌ها، نظرها و عکس‌ها فقط در حافظه موقت مرورگر پردازش می‌شوند و با بستن صفحه از بین می‌روند.</p></article><article><h3>کنترل پیش از چاپ</h3><p>سامانه نمره نامعتبر، کد تکراری، ستون ضروریِ خالی، تعداد درس خارج از محدوده و وضعیت تطبیق عکس‌ها را گزارش می‌کند.</p></article></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" role="status"></div>
+  <script src="./vendor/xlsx.full.min.js"></script>
+  <script src="./vendor/jszip.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
